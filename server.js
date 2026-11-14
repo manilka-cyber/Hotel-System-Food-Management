@@ -11,9 +11,11 @@ const JWT_SECRET = process.env.JWT_SECRET || 'marlow_mayfair_secret_2026';
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'frontend')));
 
-// Serve static frontend files directly from ../frontend
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
 
 // ============================================================================
 // 1. AUTHENTICATION ROUTES (Create Account & Log In)
