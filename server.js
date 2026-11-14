@@ -9,8 +9,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const JWT_SECRET = process.env.JWT_SECRET || 'marlow_mayfair_secret_2026';
 
-app.use(cors());
-app.use(express.json());
+//app.use(cors());
+//app.use(express.json());
 // Serve static files from the current directory or correct folders
 app.use(express.static(path.join(__dirname))); // or point to your exact public/frontend folder
 // 'frontend' kiyana folder eka ain karala root eka denna
