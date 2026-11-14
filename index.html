@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Marlow — Hotel & Food Management Suite</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Sidebar Navigation (Ordered in Logical User & Operational Flow) -->
+  <aside class="sidebar">
+    <div>
+      <div class="brand-header">
+        <div class="brand-logo">M</div>
+        <div class="brand-title">
+          <h2>The Marlow</h2>
+          <span>Hotel & Residences</span>
+        </div>
+      </div>
+
+      <div class="property-pill">
+        <strong>• Marlow - Mayfair</strong>
+        <span>London, United Kingdom</span>
+      </div>
+
+      <div class="nav-section-label">1. Onboarding & Auth</div>
+      <ul class="nav-list">
+        <li class="nav-item" onclick="switchView('create-account', this)">Create account</li>
+        <li class="nav-item" onclick="switchView('login', this)">Log in</li>
+      </ul>
+
+      <div class="nav-section-label">2. Core Hotel Operations</div>
+      <ul class="nav-list">
+        <li class="nav-item active" onclick="switchView('hotel-overview', this)">Hotel overview</li>
+        <li class="nav-item" onclick="switchView('reservations', this)">Reservations</li>
+        <li class="nav-item" onclick="switchView('rooms-guests', this)">Rooms & guests</li>
+      </ul>
+
+      <div class="nav-section-label">3. Food Management</div>
+      <ul class="nav-list">
+        <li class="nav-item" onclick="switchView('kitchen-overview', this)">Kitchen & F&B</li>
+      </ul>
+      <ul class="sub-nav">
+        <li onclick="switchView('kitchen-overview', this)">Kitchen overview</li>
+        <li onclick="switchView('meal-orders', this)">Meal orders</li>
+        <li onclick="switchView('menu-management', this)">Menu management</li>
+        <li onclick="switchView('meal-planning', this)">Meal planning</li>
+        <li onclick="switchView('inventory', this)">Inventory & expiry</li>
+      </ul>
+
+      <div class="nav-section-label">4. Facility & Admin</div>
+      <ul class="nav-list">
+        <li class="nav-item" onclick="switchView('housekeeping', this)">Housekeeping</li>
+        <li class="nav-item" onclick="switchView('team-shifts', this)">Team & shifts</li>
+        <li class="nav-item" onclick="switchView('reports', this)">Reports</li>
+        <li class="nav-item" onclick="switchView('settings', this)">Settings</li>
+        <li class="nav-item" onclick="switchView('help-support', this)">Help & support</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="shift-box">
+        <strong>• Lunch service</strong>
+        <span>11:30 AM – 3:00 PM</span>
+        <span>8 team members on duty</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Workspace -->
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="breadcrumbs" id="breadcrumb-current">Operations / Hotel overview</div>
+      <div class="topbar-right">
+        <input type="text" class="search-input" id="globalSearch" placeholder="Search order, dish, or stock..." onkeyup="handleGlobalSearch()" />
+        <div class="user-chip" onclick="switchView('login')">
+          <div class="avatar">AC</div>
+          <span>Marlow - Mayfair | Alex Carter · Manager</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- SLIDE 1: CREATE ACCOUNT -->
+      <section id="view-create-account" class="view-section">
+        <div class="auth-split">
+          <div class="auth-left">
+            <div>
+              <span style="font-size:11px; letter-spacing:0.08em; color:var(--brand-green); font-weight:700;">• MARLOW FOOD MANAGEMENT</span>
+              <h1 style="font-size:32px; margin:14px 0;">A thoughtful start to exceptional service.</h1>
+              <p style="font-size:14px; color:var(--text-secondary);">Bring your property's kitchen, menus and team together. Make every day of service feel effortless.</p>
+            </div>
+            <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80" alt="Chef Plating" style="width:100%; height:220px; object-fit:cover; border-radius:12px;" />
+          </div>
+          <div class="auth-right">
+            <span style="font-size:11px; color:var(--text-muted); letter-spacing:0.08em;">WELCOME TO MARLOW</span>
+            <h2 style="font-size:28px; margin:6px 0 18px;">Create your account.</h2>
+            <form onsubmit="event.preventDefault(); alert('Account created! Redirecting to Hotel Overview...'); switchView('hotel-overview');">
+              <div class="form-group"><label>Full name</label><input type="text" required placeholder="e.g. Alex Carter" /></div>
+              <div class="form-group"><label>Hotel / property name</label><input type="text" required placeholder="e.g. Marlow - Mayfair" /></div>
+              <div class="form-group"><label>Work email</label><input type="email" required placeholder="you@yourhotel.com" /></div>
+              <div class="form-group"><label>Password</label><input type="password" required placeholder="Create a password" /></div>
+              <button type="submit" class="btn btn-primary" style="width:100%; margin-top:8px;">Create account →</button>
+            </form>
+            <p style="font-size:12.5px; margin-top:16px; color:var(--text-secondary);">Already have an account? <a href="#" style="color:var(--brand-green); font-weight:600;" onclick="event.preventDefault(); switchView('login');">Log in</a></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: LOG IN -->
+      <section id="view-login" class="view-section">
+        <div class="auth-split">
+          <div class="auth-left">
+            <div>
+              <span style="font-size:11px; letter-spacing:0.08em; color:var(--brand-green); font-weight:700;">• MARLOW FOOD MANAGEMENT</span>
+              <h1 style="font-size:32px; margin:14px 0;">Great service starts behind the scenes.</h1>
+              <p style="font-size:14px; color:var(--text-secondary);">Your kitchen, menus, orders and team. Together in one calm, connected workspace.</p>
+            </div>
+            <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80" alt="Chef Plating" style="width:100%; height:220px; object-fit:cover; border-radius:12px;" />
+          </div>
+          <div class="auth-right">
+            <span style="font-size:11px; color:var(--text-muted); letter-spacing:0.08em;">AT YOUR SERVICE</span>
+            <h2 style="font-size:28px; margin:6px 0 18px;">Welcome back.</h2>
+            <form onsubmit="event.preventDefault(); switchView('hotel-overview');">
+              <div class="form-group"><label>Email address</label><input type="email" required value="alex.carter@themarlow.example" /></div>
+              <div class="form-group"><label>Password</label><input type="password" required value="••••••••••••" /></div>
+              <button type="submit" class="btn btn-primary" style="width:100%; margin-top:8px;">Log in →</button>
+            </form>
+            <p style="font-size:12.5px; margin-top:16px; color:var(--text-secondary);">New to Marlow? <a href="#" style="color:var(--brand-green); font-weight:600;" onclick="event.preventDefault(); switchView('create-account');">Register</a></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: HOTEL OVERVIEW (WITH HERO IMAGE ADDED) -->
+      <section id="view-hotel-overview" class="view-section active">
+        <div class="page-header">
+          <div>
+            <h1>Hotel overview</h1>
+            <p>A clear picture of your hotel, from arrival to departure.</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" onclick="switchView('kitchen-overview')">View daily briefing</button>
+          </div>
+        </div>
+
+        <!-- Added Hero Image matching The Marlow aesthetic -->
+        <img class="hero-banner" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1400&q=80" alt="The Marlow Luxury Hotel Lobby & Courtyard" />
+
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">Occupancy</div>
+            <div class="kpi-value">86%</div>
+            <div class="kpi-sub">103 of 120 rooms occupied</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Arrivals today</div>
+            <div class="kpi-value">24</div>
+            <div class="kpi-sub">18 checked in · 6 expected</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Departures today</div>
+            <div class="kpi-value">17</div>
+            <div class="kpi-sub">14 checked out · 3 remaining</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Revenue today</div>
+            <div class="kpi-value">£24,860</div>
+            <div class="kpi-sub positive">↑ 8.2% vs. yesterday</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Occupancy this week</div>
+            <span style="font-size:12px; color:var(--text-muted);">16–22 October 2026 · Average 82%</span>
+          </div>
+          <div class="bar-chart">
+            <div class="bar-col"><span class="bar-val">74%</span><div class="bar-fill" style="height:74%"></div><span class="bar-day">Fri</span></div>
+            <div class="bar-col"><span class="bar-val">91%</span><div class="bar-fill" style="height:91%"></div><span class="bar-day">Sat</span></div>
+            <div class="bar-col"><span class="bar-val">82%</span><div class="bar-fill" style="height:82%"></div><span class="bar-day">Sun</span></div>
+            <div class="bar-col"><span class="bar-val">76%</span><div class="bar-fill" style="height:76%"></div><span class="bar-day">Mon</span></div>
+            <div class="bar-col"><span class="bar-val">79%</span><div class="bar-fill" style="height:79%"></div><span class="bar-day">Tue</span></div>
+            <div class="bar-col"><span class="bar-val">86%</span><div class="bar-fill" style="height:86%"></div><span class="bar-day">Wed</span></div>
+            <div class="bar-col"><span class="bar-val">86%</span><div class="bar-fill highlight" style="height:86%"></div><span class="bar-day">Thu</span></div>
+          </div>
+        </div>
+
+        <div class="split-1-1">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Today's priorities</div></div>
+            <table>
+              <tr><td>6 guests arriving after 3 PM</td><td style="text-align:right; color:var(--text-muted)">Front desk</td></tr>
+              <tr><td>Room 512 – delayed meal order</td><td style="text-align:right; color:var(--status-alert-text)">Kitchen</td></tr>
+              <tr><td>8 rooms awaiting inspection</td><td style="text-align:right; color:var(--text-muted)">Housekeeping</td></tr>
+              <tr><td>Dinner service briefing at 5 PM</td><td style="text-align:right; color:var(--text-muted)">Team</td></tr>
+            </table>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Department status</div></div>
+            <table>
+              <tr><td>Front desk</td><td style="text-align:right; color:var(--brand-green)">Fully staffed</td></tr>
+              <tr><td>Kitchen · 30 active orders</td><td style="text-align:right; color:var(--brand-green)">Service running</td></tr>
+              <tr><td>Housekeeping · 12 in progress</td><td style="text-align:right; color:var(--brand-green)">On schedule</td></tr>
+              <tr><td>Maintenance · 2 open requests</td><td style="text-align:right; color:var(--text-muted)">Assigned</td></tr>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: RESERVATIONS -->
+      <section id="view-reservations" class="view-section">
+        <div class="page-header">
+          <div><h1>Reservations</h1><p>Manage bookings, arrivals, and guest stay schedules.</p></div>
+          <button class="btn btn-primary" onclick="alert('New reservation dialog opened')">+ New reservation</button>
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="kpi-label">Bookings today</div><div class="kpi-value">32</div><div class="kpi-sub positive">+4 vs. yesterday</div></div>
+          <div class="kpi-card"><div class="kpi-label">Expected arrivals</div><div class="kpi-value">6</div><div class="kpi-sub">Before 8:00 PM</div></div>
+          <div class="kpi-card"><div class="kpi-label">In-house guests</div><div class="kpi-value">176</div><div class="kpi-sub">Across 103 rooms</div></div>
+          <div class="kpi-card"><div class="kpi-label">Cancellation rate</div><div class="kpi-value">2.4%</div><div class="kpi-sub positive">-0.5% this month</div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Upcoming arrivals</div></div>
+          <table>
+            <thead><tr><th>Booking</th><th>Guest</th><th>Stay</th><th>Room Type</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td><strong>#MR2048</strong></td><td>Emma Wilson</td><td>22–25 Oct · 3 nights</td><td>Deluxe King</td><td><span class="badge badge-new">Confirmed</span></td></tr>
+              <tr><td><strong>#MR2047</strong></td><td>James Chen</td><td>22–24 Oct · 2 nights</td><td>Garden Suite</td><td><span class="badge badge-ready">Checked in</span></td></tr>
+              <tr><td><strong>#MR2046</strong></td><td>Sofia Rossi</td><td>22–26 Oct · 4 nights</td><td>Classic Queen</td><td><span class="badge badge-new">Confirmed</span></td></tr>
+              <tr><td><strong>#MR2044</strong></td><td>Amalia Patel</td><td>22–25 Oct · 3 nights</td><td>Junior Suite</td><td><span class="badge badge-ready">Checked in</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: ROOMS & GUESTS -->
+      <section id="view-rooms-guests" class="view-section">
+        <div class="page-header">
+          <div><h1>Rooms & guests</h1><p>Room readiness and guest needs, all in one place.</p></div>
+        </div>
+        <img class="hero-banner" src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1400&q=80" alt="Luxury Hotel Bedroom" />
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="kpi-label">Total rooms</div><div class="kpi-value">120</div><div class="kpi-sub">5 floors · 6 room types</div></div>
+          <div class="kpi-card"><div class="kpi-label">Occupied</div><div class="kpi-value">103</div><div class="kpi-sub">86% occupancy</div></div>
+          <div class="kpi-card"><div class="kpi-label">Available</div><div class="kpi-value">15</div><div class="kpi-sub positive">Ready for arrival</div></div>
+          <div class="kpi-card"><div class="kpi-label">Out of service</div><div class="kpi-value">2</div><div class="kpi-sub warning">Maintenance in progress</div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Room status · Floor 3</div></div>
+          <div class="room-grid" id="roomsGrid"></div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: KITCHEN OVERVIEW -->
+      <section id="view-kitchen-overview" class="view-section">
+        <div class="page-header">
+          <div><h1>Kitchen overview</h1><p>Keep every station in sync and every service on time.</p></div>
+          <button class="btn btn-primary" onclick="openModal('newOrderModal')">+ New order</button>
+        </div>
+        <img class="hero-banner" src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1400&q=80" alt="Kitchen Chefs" />
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="kpi-label">Active orders</div><div class="kpi-value" id="kitchenActiveCount">7</div><div class="kpi-sub">Live station board</div></div>
+          <div class="kpi-card"><div class="kpi-label">Average prep time</div><div class="kpi-value">16 min</div><div class="kpi-sub positive">↓ 3 min faster vs. yesterday</div></div>
+          <div class="kpi-card"><div class="kpi-label">Team on duty</div><div class="kpi-value">8</div><div class="kpi-sub">All stations covered</div></div>
+          <div class="kpi-card"><div class="kpi-label">Service exceptions</div><div class="kpi-value" style="color:var(--status-alert-text)">1 delayed</div><div class="kpi-sub warning">Room 512 needs attention</div></div>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Hot kitchen</div><span style="font-size:12px; color:var(--text-muted)">Chef Marco</span></div>
+            <div class="info-box"><strong>#1048 · Room 304</strong><br/>Grilled salmon, Caesar salad · <em>New (2m)</em></div>
+            <div class="alert-box"><strong>#1044 · Room 512</strong><br/>Seared sea bass, fries · <em>Delayed (24m)</em></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Cold kitchen</div><span style="font-size:12px; color:var(--text-muted)">Chef Priya</span></div>
+            <div class="info-box"><strong>#1047 · Table 12</strong><br/>Truffle mushroom risotto · <em>Preparing (8m)</em></div>
+            <div class="info-box" style="background:var(--brand-green-soft); border-color:#C3D9CE; color:var(--brand-green)"><strong>#1042 · Room 406</strong><br/>Caesar salad, fresh juice · <em>Ready (9m)</em></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Pastry & beverages</div><span style="font-size:12px; color:var(--text-muted)">Chef Elena</span></div>
+            <div class="info-box"><strong>#1043 · Table 08</strong><br/>Lemon tart, herbal tea · <em>Preparing (11m)</em></div>
+            <div class="info-box" style="background:var(--brand-green-soft); border-color:#C3D9CE; color:var(--brand-green)"><strong>#1046 · Room 218</strong><br/>Club sandwich, fresh juice · <em>Ready (12m)</em></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: MEAL ORDERS (QUEUE + DETAIL DRAWER) -->
+      <section id="view-meal-orders" class="view-section">
+        <div class="page-header">
+          <div><h1>Meal orders</h1><p>Every order, from first ticket to final delivery.</p></div>
+          <button class="btn btn-primary" onclick="openModal('newOrderModal')">+ New order</button>
+        </div>
+        <img class="hero-banner" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=80" alt="In-room Dining Tray" />
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="kpi-label">Total orders today</div><div class="kpi-value">148</div><div class="kpi-sub positive">↑ 12.1% vs. yesterday</div></div>
+          <div class="kpi-card"><div class="kpi-label">Active orders</div><div class="kpi-value" id="ordersActiveStat">7</div><div class="kpi-sub">Live queue</div></div>
+          <div class="kpi-card"><div class="kpi-label">Average preparation</div><div class="kpi-value">16 min</div><div class="kpi-sub positive">↓ 3 min faster</div></div>
+          <div class="kpi-card"><div class="kpi-label">Service exceptions</div><div class="kpi-value" style="color:var(--status-alert-text)">1 delayed</div><div class="kpi-sub warning">Order #1044 needs attention</div></div>
+        </div>
+        <div class="split-2-1">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Order queue</div>
+              <div>
+                <button class="btn btn-outline btn-sm" onclick="filterOrders('All')">All</button>
+                <button class="btn btn-outline btn-sm" onclick="filterOrders('New')">New</button>
+                <button class="btn btn-outline btn-sm" onclick="filterOrders('Preparing')">Preparing</button>
+                <button class="btn btn-outline btn-sm" onclick="filterOrders('Ready')">Ready</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Order</th><th>Room / Table</th><th>Items</th><th>Status</th><th>Elapsed</th><th>Action</th></tr></thead>
+                <tbody id="ordersTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title" id="detailOrderId">Order #1048</div><span class="badge badge-new" id="detailOrderBadge">New</span></div>
+            <h3 id="detailRoom" style="font-size:18px; margin-bottom:2px;">Room 304</h3>
+            <p id="detailGuest" style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">Emma Wilson · 2 guests</p>
+            <div class="info-box" id="detailAllergy"></div>
+            <div id="detailItemsList" style="margin:14px 0; font-size:13.5px; line-height:1.8;"></div>
+            <div style="display:flex; justify-content:space-between; padding:12px 0; border-top:1px solid var(--border-light); border-bottom:1px solid var(--border-light); font-weight:600;">
+              <span>Order total</span><span id="detailTotal">£36.00</span>
+            </div>
+            <p style="font-size:12px; color:var(--text-muted); margin:12px 0;">Assigned Station: <strong id="detailStation" style="color:var(--text-primary)">Hot kitchen</strong></p>
+            <button class="btn btn-primary" style="width:100%;" id="detailActionBtn" onclick="advanceSelectedOrder()">Accept order</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: MENU MANAGEMENT -->
+      <section id="view-menu-management" class="view-section">
+        <div class="page-header">
+          <div><h1>Menu management</h1><p>Thoughtfully curated, always up to date. Manage every dish and service menu.</p></div>
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="kpi-label">Dishes on the menu</div><div class="kpi-value">48</div><div class="kpi-sub">Across 6 menu categories</div></div>
+          <div class="kpi-card"><div class="kpi-label">Available today</div><div class="kpi-value" id="menuAvailCount">5</div><div class="kpi-sub">Linked to kitchen stock</div></div>
+          <div class="kpi-card"><div class="kpi-label">Average dish price</div><div class="kpi-value">£18.50</div><div class="kpi-sub">All prices include VAT</div></div>
+          <div class="kpi-card"><div class="kpi-label">Average food cost</div><div class="kpi-value">28%</div><div class="kpi-sub positive">Within 30% target</div></div>
+        </div>
+        <div class="grid-3" id="menuGalleryGrid"></div>
+      </section>
+
+      <!-- SLIDE 9: MEAL PLANNING -->
+      <section id="view-meal-planning" class="view-section">
+        <div class="page-header">
+          <div><h1>Meal planning</h1><p>Plan ahead for every service. Align your menus, covers and kitchen preparation.</p></div>
+          <button class="btn btn-primary" onclick="alert('Weekly service plan published to kitchen stations!')">Publish week</button>
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="kpi-label">Forecast covers this week</div><div class="kpi-value">2,266</div><div class="kpi-sub">914 breakfast · 598 lunch · 754 dinner</div></div>
+          <div class="kpi-card"><div class="kpi-label">Today's forecast</div><div class="kpi-value">314</div><div class="kpi-sub">128 breakfast · 82 lunch · 104 dinner</div></div>
+          <div class="kpi-card"><div class="kpi-label">Planned services</div><div class="kpi-value">21</div><div class="kpi-sub">7 days · breakfast, lunch & dinner</div></div>
+          <div class="kpi-card"><div class="kpi-label">Private dining</div><div class="kpi-value">18 guests</div><div class="kpi-sub">Tonight at 7:00 PM · Garden Room</div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Weekly service plan (19–25 Oct 2026)</div></div>
+          <table>
+            <thead><tr><th>Service</th><th>Mon 19</th><th>Tue 20</th><th>Wed 21</th><th>Thu 22 (Today)</th><th>Fri 23</th><th>Sat 24</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Breakfast</strong></td><td>English breakfast (118)</td><td>Eggs Benedict (120)</td><td>English breakfast (124)</td><td><strong>English breakfast (128)</strong></td><td>Eggs Benedict (136)</td><td>Pancakes & berries (148)</td></tr>
+              <tr><td><strong>Lunch</strong></td><td>Club sandwich (68)</td><td>Margherita pizza (72)</td><td>Club sandwich (76)</td><td><strong>Grilled salmon (82)</strong></td><td>Margherita pizza (90)</td><td>Burrata salad (112)</td></tr>
+              <tr><td><strong>Dinner</strong></td><td>Grilled salmon (86)</td><td>Roast chicken (88)</td><td>Mushroom risotto (92)</td><td><strong>Mushroom risotto (104)</strong></td><td>Grilled salmon (118)</td><td>Seared sea bass (142)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: INVENTORY & BARCODE EXPIRATION TRACKING -->
+      <section id="view-inventory" class="view-section">
+        <div class="page-header">
+          <div><h1>Inventory & food waste control</h1><p>Track ingredients, barcode expiration dates, reduce waste, and stay service-ready.</p></div>
+          <button class="btn btn-primary" onclick="openModal('addStockModal')">+ Add stock / Scan barcode</button>
+        </div>
+        <img class="hero-banner" src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1400&q=80" alt="Fresh Ingredients" />
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="kpi-label">Stock value</div><div class="kpi-value">£8,420</div><div class="kpi-sub">Across 128 ingredients</div></div>
+          <div class="kpi-card"><div class="kpi-label">Low-stock / Expiring soon</div><div class="kpi-value" style="color:var(--status-alert-text)" id="lowStockCount">3</div><div class="kpi-sub warning">Use first to prevent waste</div></div>
+          <div class="kpi-card"><div class="kpi-label">Deliveries today</div><div class="kpi-value">3</div><div class="kpi-sub">2 received · 1 expected</div></div>
+          <div class="kpi-card"><div class="kpi-label">Food waste this week</div><div class="kpi-value">2.1%</div><div class="kpi-sub positive">↓ 0.8% vs. last week</div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Stock levels & barcode expiration dates</div></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>SKU / Barcode</th><th>Ingredient</th><th>Category / Storage</th><th>On hand</th><th>Expiry Date</th><th>Supplier</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="inventoryTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: HOUSEKEEPING -->
+      <section id="view-housekeeping" class="view-section">
+        <div class="page-header">
+          <div><h1>Housekeeping</h1><p>Give every guest a room that feels thoughtfully prepared.</p></div>
+        </div>
+        <img class="hero-banner" src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1400&q=80" alt="Housekeeping Suite" />
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="kpi-label">Rooms to service</div><div class="kpi-value">34</div></div>
+          <div class="kpi-card"><div class="kpi-label">In progress</div><div class="kpi-value">12</div></div>
+          <div class="kpi-card"><div class="kpi-label">Awaiting inspection</div><div class="kpi-value">8</div></div>
+          <div class="kpi-card"><div class="kpi-label">Completed today</div><div class="kpi-value">14</div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Room service tasks</div></div>
+          <table>
+            <thead><tr><th>Room</th><th>Task</th><th>Assigned to</th><th>Priority</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Room 304</strong></td><td>Stayover service</td><td>Maria Santos</td><td>Normal</td><td><span class="badge badge-prep">In progress</span></td></tr>
+              <tr><td><strong>Room 306</strong></td><td>Departure clean</td><td>Aisha Khan</td><td>High · arrival 2 PM</td><td><span class="badge badge-prep">In progress</span></td></tr>
+              <tr><td><strong>Room 311</strong></td><td>Final inspection</td><td>Helen Moore</td><td>High</td><td><span class="badge badge-new">Awaiting inspection</span></td></tr>
+              <tr><td><strong>Room 401</strong></td><td>Linen refresh</td><td>Daniel Lee</td><td>Normal</td><td><span class="badge badge-ready">Completed</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: TEAM & SHIFTS -->
+      <section id="view-team-shifts" class="view-section">
+        <div class="page-header">
+          <div><h1>Team & shifts</h1><p>The right people, in the right place, at the right time.</p></div>
+        </div>
+        <img class="hero-banner" src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=1400&q=80" alt="Hospitality Team" />
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="kpi-label">Team members</div><div class="kpi-value">42</div></div>
+          <div class="kpi-card"><div class="kpi-label">On duty now</div><div class="kpi-value">24</div></div>
+          <div class="kpi-card"><div class="kpi-label">Upcoming shifts</div><div class="kpi-value">18</div></div>
+          <div class="kpi-card"><div class="kpi-label">Open shift requests</div><div class="kpi-value">2</div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Today's roster</div></div>
+          <table>
+            <thead><tr><th>Team member</th><th>Department</th><th>Role</th><th>Shift</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Alex Carter</strong></td><td>Food & beverage</td><td>F&B manager</td><td>9:00 AM–6:00 PM</td><td><span class="badge badge-ready">On duty</span></td></tr>
+              <tr><td><strong>Marco Bianchi</strong></td><td>Kitchen</td><td>Head chef</td><td>10:00 AM–7:00 PM</td><td><span class="badge badge-ready">On duty</span></td></tr>
+              <tr><td><strong>Priya Sharma</strong></td><td>Kitchen</td><td>Sous chef</td><td>10:00 AM–7:00 PM</td><td><span class="badge badge-ready">On duty</span></td></tr>
+              <tr><td><strong>Maria Santos</strong></td><td>Housekeeping</td><td>Room attendant</td><td>7:00 AM–3:00 PM</td><td><span class="badge badge-ready">On duty</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: REPORTS -->
+      <section id="view-reports" class="view-section">
+        <div class="page-header">
+          <div><h1>Reports</h1><p>Turn daily operations into a clearer view of performance.</p></div>
+          <button class="btn btn-primary" onclick="alert('Daily operations & food waste report exported!')">Export report</button>
+        </div>
+        <img class="hero-banner" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80" alt="Restaurant Dining Room" />
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="kpi-label">Total revenue</div><div class="kpi-value">£24,860</div><div class="kpi-sub positive">↑ 8.2% vs. yesterday</div></div>
+          <div class="kpi-card"><div class="kpi-label">Occupancy</div><div class="kpi-value">86%</div></div>
+          <div class="kpi-card"><div class="kpi-label">Average daily rate</div><div class="kpi-value">£190</div></div>
+          <div class="kpi-card"><div class="kpi-label">Guest satisfaction</div><div class="kpi-value">4.8 / 5</div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Daily performance · 22 October</div></div>
+          <table>
+            <thead><tr><th>Metric</th><th>Today</th><th>Yesterday</th><th>Change</th><th>Trend</th></tr></thead>
+            <tbody>
+              <tr><td>Room revenue</td><td>£19,575</td><td>£18,120</td><td>+8.0%</td><td style="color:var(--brand-green)">Improving</td></tr>
+              <tr><td>Food & beverage</td><td>£4,215</td><td>£3,960</td><td>+6.4%</td><td style="color:var(--brand-green)">Improving</td></tr>
+              <tr><td>Meal preparation</td><td>16 min</td><td>19 min</td><td>-3 min</td><td style="color:var(--brand-green)">Faster service</td></tr>
+              <tr><td>Food waste</td><td>2.1%</td><td>2.9%</td><td>-0.8 pp</td><td style="color:var(--brand-green)">Less waste</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: SETTINGS -->
+      <section id="view-settings" class="view-section">
+        <div class="page-header">
+          <div><h1>Settings</h1><p>Manage your hotel, preferences, and operating policies.</p></div>
+          <button class="btn btn-primary" onclick="alert('Hotel profile settings saved!')">Save changes</button>
+        </div>
+        <img class="hero-banner" src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1400&q=80" alt="Hotel Exterior" />
+        <div class="card">
+          <div class="card-header"><div class="card-title">Hotel profile</div></div>
+          <div class="split-1-1">
+            <div class="form-group"><label>Hotel name</label><input type="text" value="The Marlow" /></div>
+            <div class="form-group"><label>Property</label><input type="text" value="Marlow - Mayfair" /></div>
+            <div class="form-group"><label>Address</label><input type="text" value="18 Grosvenor Street, Mayfair, London" /></div>
+            <div class="form-group"><label>Contact email</label><input type="email" value="operations@themarlow.example" /></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: HELP & SUPPORT -->
+      <section id="view-help-support" class="view-section">
+        <div class="page-header">
+          <div><h1>Help & support</h1><p>Find an answer, explore a guide, or reach our team.</p></div>
+        </div>
+        <img class="hero-banner" src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=80" alt="Concierge Support" />
+        <div class="grid-3">
+          <div class="card"><div class="card-title" style="margin-bottom:8px;">Getting started</div><p style="font-size:13px; color:var(--text-secondary);">Hotel profile, team invites, and role permissions.</p></div>
+          <div class="card"><div class="card-title" style="margin-bottom:8px;">Daily operations</div><p style="font-size:13px; color:var(--text-secondary);">Manage arrivals, track meal orders, and barcode inventory.</p></div>
+          <div class="card"><div class="card-title" style="margin-bottom:8px;">Reports & settings</div><p style="font-size:13px; color:var(--text-secondary);">Download daily food waste & revenue summaries.</p></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MODAL: New Kitchen Order -->
+  <div class="modal-backdrop" id="newOrderModal">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <h2>Create Meal Order</h2>
+        <button class="btn btn-outline btn-sm" onclick="closeModal('newOrderModal')">✕</button>
+      </div>
+      <form onsubmit="createNewOrder(event)">
+        <div class="form-group"><label>Room or Table</label><input type="text" id="newOrderRoom" required placeholder="e.g. Room 309 or Table 04" /></div>
+        <div class="form-group"><label>Guest Name</label><input type="text" id="newOrderGuest" required placeholder="e.g. Daniel Lee" /></div>
+        <div class="form-group">
+          <label>Dish Selection</label>
+          <select id="newOrderDish">
+            <option value="Grilled salmon, Caesar salad|36.00">Grilled salmon, Caesar salad (£36.00)</option>
+            <option value="Truffle mushroom risotto|19.00">Truffle mushroom risotto (£19.00)</option>
+            <option value="Club sandwich, fresh juice|16.00">Club sandwich, fresh juice (£16.00)</option>
+            <option value="Margherita pizza|17.00">Margherita pizza (£17.00)</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Dietary / Allergy Notes</label><input type="text" id="newOrderAllergy" placeholder="e.g. No nuts, Gluten-free" /></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Send to Kitchen</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Add Stock / Barcode Scan -->
+  <div class="modal-backdrop" id="addStockModal">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <h2>Add Inventory / Scan Barcode</h2>
+        <button class="btn btn-outline btn-sm" onclick="closeModal('addStockModal')">✕</button>
+      </div>
+      <form onsubmit="addInventoryItem(event)">
+        <div class="form-group"><label>SKU</label><input type="text" id="stockSku" required placeholder="e.g. ST-007" /></div>
+        <div class="form-group"><label>Barcode Number</label><input type="text" id="stockBarcode" required placeholder="e.g. 89012345007" /></div>
+        <div class="form-group"><label>Ingredient Name</label><input type="text" id="stockName" required placeholder="e.g. Organic Whole Milk" /></div>
+        <div class="form-group">
+          <label>Category / Storage</label>
+          <select id="stockCategory">
+            <option>Seafood · Chilled</option>
+            <option>Dairy · Chilled</option>
+            <option>Produce · Chilled</option>
+            <option>Dry goods · Pantry</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Quantity On Hand</label><input type="text" id="stockQty" required placeholder="e.g. 10 litres" /></div>
+        <div class="form-group"><label>Expiration Date</label><input type="date" id="stockExpiry" required /></div>
+        <div class="form-group"><label>Supplier</label><input type="text" id="stockSupplier" required value="Fresh & Co." /></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Save Stock Item</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
